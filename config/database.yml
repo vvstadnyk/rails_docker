@@ -1,0 +1,27 @@
+defaults: &defaults
+  adapter: <%= ENV['DB_ADAPTER']%>
+  pool: <%= ENV['DB_POOL']%>
+  timeout: <%= ENV['DB_TIMEOUT']%>
+  encoding: <%= ENV['DB_ENCODING']%>
+  reaping_frequency: <%= ENV['DB_REAPING_FREQUENCY']%>
+
+development:
+  <<: *defaults
+  host: <%= ENV['DB_HOST']%>
+  database: <%= ENV['DB_DATABASE']%>
+  username: <%= ENV['DB_USERNAME']%>
+  password: <%= ENV['DB_PASSWORD']%>
+
+production:
+  <<: *defaults
+  host: <%= ENV['DB_HOST']%>
+  database: <%= ENV['DB_DATABASE']%>
+  username: <%= ENV['DB_USERNAME']%>
+  password: <%= ENV['DB_PASSWORD']%>
+
+stage:
+  <<: *defaults
+  host: <%= ENV['DB_HOST']%>
+  database: <%= ENV['DB_DATABASE']%>
+  username: <%= ENV['DB_USERNAME']%>
+  password: <%= ENV['DB_PASSWORD']%>

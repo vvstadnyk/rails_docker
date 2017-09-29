@@ -1,0 +1,59 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.5
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+    restart: always
+  redis:
+    image: redis
+    ports:
+      - 6378:6379
+    volumes:
+      - data-redis:/data
+    restart: always
+  web:
+    build:
+      context: .
+      dockerfile: app.development.Dockerfile
+    command: /bin/sh -c "bundle exec passenger start"
+    volumes:
+      - .:/app
+      - data-tmp:/app/tmp
+      - bundle:/bundle
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+      - db
+    env_file: .env
+    dns:
+      - 8.8.8.8
+    restart: always
+  sidekiq:
+    build:
+      context: .
+      dockerfile: app.development.Dockerfile
+    volumes:
+      - .:/app
+      - data-tmp:/app/tmp
+      - bundle:/bundle
+    depends_on:
+      - redis
+      - db
+    command: /bin/sh -c "bundle exec sidekiq"
+    env_file: .env
+    dns:
+      - 8.8.8.8
+    restart: always
+volumes:
+  data-tmp:
+    driver: local
+  data-postgres:
+    driver: local
+  data-redis:
+    driver: local
+  bundle:
+    driver: local
