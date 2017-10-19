@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    volumes:
+      - project-sync:/app:rw
+  sidekiq:
+    volumes:
+      - project-sync:/app:rw
+volumes:
+  project-sync:
+    external: true

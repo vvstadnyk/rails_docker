@@ -35,3 +35,24 @@ Run rails console:
 docker-compose run --rm web bundle exec rails console
 ```
 
+To have a better performance on OSX recommended to use docker-sync
+Installation here: https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
+
+Start docker-sync demon
+
+```
+docker-sync start
+```
+
+Start project
+
+```
+export COMPOSE_FILE=app.development.docker-compose.yml;docker-compose-sync.yml
+docker-compose up 
+```
+
+OR
+
+```
+docker-compose -f app.development.docker-compose.yml -f docker-compose-sync.yml up 
+```

@@ -20,7 +20,7 @@ services:
       dockerfile: app.development.Dockerfile
     command: /bin/sh -c "bundle exec passenger start"
     volumes:
-      - .:/app
+      - .:/app:rw
       - data-tmp:/app/tmp
       - bundle:/bundle
     ports:
@@ -37,7 +37,7 @@ services:
       context: .
       dockerfile: app.development.Dockerfile
     volumes:
-      - .:/app
+      - .:/app:rw
       - data-tmp:/app/tmp
       - bundle:/bundle
     depends_on:
