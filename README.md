@@ -47,7 +47,7 @@ docker-sync start
 Start project
 
 ```
-export COMPOSE_FILE=app.development.docker-compose.yml;docker-compose-sync.yml
+export COMPOSE_FILE=app.development.docker-compose.yml:docker-compose-sync.yml
 docker-compose up 
 ```
 
